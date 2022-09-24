@@ -86,11 +86,11 @@ def view_total():
     orderTotal.delete('1.00', END)
     item_count  = book_count + bag_count + cat_count
 
-    purchaseStringBook = '\nBooks purchased: %i ' % book_count
+    purchaseStringBook = '\nAmount of books in cart: %i ' % book_count
     
-    purchaseStringBag = '\nBags purchased: %i ' % bag_count
+    purchaseStringBag = '\nAmount of bags in cart: %i ' % bag_count
     
-    purchaseStringCat = '\nCats purchased: %i ' % cat_count   
+    purchaseStringCat = '\nAmount of cats in cart: %i ' % cat_count   
     totalString = '\n\nYour total is: $%i' % total  
     
     orderTotal.insert('1.00', totalString)
@@ -134,10 +134,17 @@ delete_button.grid(row = 12, column = 1)
 def cart_cleared():
     global total
     global item_count
+    global book_count
+    global bag_count
+    global cat_count
+    book_count = 0
+    bag_count = 0
+    cat_count = 0
     shoppingCart.delete('1.00', END)
     orderTotal.delete('1.00', END)
     item_count = []
     total = 0
+    view_total()
  
 clearButton = Button(root, text = 'clear cart', fg = '#AA336A', command = cart_cleared)
 clearButton.grid(row = 17, column = 1)
